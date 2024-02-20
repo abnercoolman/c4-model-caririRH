@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+Boundary(c1, "CaririRH - Nível de Contexto") {
+    ' Pessoa interessada no uso do sistema
+    Person(ucr, "Usuário CaririRH", "Administrador ou Gerente de RH, pessoa responsável por administrar os funcionários.","Person")
+    ' Descrição do sistema
+    System(crh, "CaririRH", "Sistema web de recursos humanos para a gestão de funcionários, cargos e processos relacionados.")
+}
+
+Rel(ucr, crh, "Gerencia funcionários utilizando o")
+
+@enduml

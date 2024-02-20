@@ -1,0 +1,73 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+namespace BaseClass #DDDDDD {
+
+}
+
+Boundary(c4, "CaririRH - Nível de Código [Contêiner - API]") {
+    ' Componentes do Contêiner "API"
+
+    Boundary(Ufunc, "Componente - Atualizar Dados Funcionário"){
+
+        'Class(UpdateService, "UpdateService", "Classe: UpdateService", "Lógica de atualização dos dados do funcionário.")
+        'Class(Validator, "Validator", "Classe: Validator", "Validação dos dados de entrada.")
+        'Class(DatabaseHelper, "DatabaseHelper", "Classe: DatabaseHelper", "Auxilia na comunicação com o banco de dados.")
+
+        namespace UpdateClass #DDDDDD {
+            class UpdateService
+            class UpdateValidator
+            class UpdateDatabaseHelper
+        }
+    }
+
+    Boundary(Cfunc, "Componente - Cadastro de Funcionário"){
+
+        'Class(CreateService, "CreateService", "Classe: CreateService", "Lógica de criação de um novo funcionário.")
+        'Class(Validator, "Validator", "Classe: Validator", "Validação dos dados de entrada.")
+        'Class(DatabaseHelper, "DatabaseHelper", "Classe: DatabaseHelper", "Auxilia na comunicação com o banco de dados.")
+
+        namespace CreateClass #DDDDDD {
+            class CreateService
+            class CreateValidator
+            class CreateDatabaseHelper
+        }
+    }
+
+    Boundary(Rfunc, "Ler Dados Funcionário"){
+
+        'Class(ReadService, "ReadService", "Classe: ReadService", "Lógica de leitura dos dados do funcionário.")
+        'Class(DatabaseHelper, "DatabaseHelper", "Classe: DatabaseHelper", "Auxilia na comunicação com o banco de dados.")
+
+        namespace ReadClass #DDDDDD {
+            class ReadService
+            class ReadValidator
+            class ReadDatabaseHelper
+        }
+    }
+
+    Boundary(login, "Login Administrador"){
+
+        'Class(LoginService, "LoginService", "Classe: LoginService", "Lógica de autenticação do usuário.")
+        'Class(PasswordManager, "PasswordManager", "Classe: PasswordManager", "Gerencia operações relacionadas à senha.")
+        'Class(DatabaseHelper, "DatabaseHelper", "Classe: DatabaseHelper", "Auxilia na comunicação com o banco de dados.")
+
+        namespace LoginClass #DDDDDD {
+            class LoginService
+            class PasswordManager
+            class LoginDatabaseHelper
+        }
+    }
+
+    Boundary(Dfunc, "Deletar Dados Funcionário"){
+
+        'Class(DeleteService, "DeleteService", "Classe: DeleteService", "Lógica de exclusão dos dados do funcionário.")
+        '     Class(DatabaseHelper, "DatabaseHelper", "Classe: DatabaseHelper", "Auxilia na comunicação com o banco de dados.")
+
+        namespace DeleteClass #DDDDDD {
+            class DeleteService
+            class DeleteDatabaseHelper
+        }
+    }
+}
+@enduml

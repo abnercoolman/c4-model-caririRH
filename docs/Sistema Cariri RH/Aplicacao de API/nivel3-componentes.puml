@@ -1,0 +1,33 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+Boundary(c3, "CaririRH - Nível de Componentes [Contêiner - API]") {
+    ' Descrição do sistema
+    Container(front, "Cariri RH - Web Application", "React.JS", "Interface web para utilização do sistema de gerenciamento dos funcionários, com API REST para chamadas de operações CRUD.")
+    Container_Boundary(back, "API"){
+        Component(Ufunc, "Atualizar Dados Funcionário", "Componente: Express.JS", "Atualiza os dados do funcionário.")
+        Component(Cfunc, "Cadastro de Funcionário", "Componente: Express.JS", "Faz aquisição de dados do funcionário.")
+        Component(Rfunc, "Ler Dados Funcionário", "Componente: Express.JS", "Realiza a leitura de dados do funcionário.")
+        Component(login, "Login Administrador", "Componente: Express.JS", "Tarefas relacionadas a login, senha e alteração de senha.")
+        Component(Dfunc, "Deletar Dados Funcionário", "Componente: Express.JS", "Deleta os dados do funcionário.")
+    }
+
+    ContainerDb(db, "Bancos de Dados", "MongoDB", "Armazena todas as informações sobre os funcionários.")
+
+    Rel(front,login,"Usa","NodeJS")
+    Rel(login,db,"Leitura e Escrita","JSON/HTTPS")
+    Rel(front,Cfunc,"Usa","NodeJS")
+    Rel(Cfunc,db,"Leitura e Escrita","JSON/HTTPS")
+    Rel(front,Ufunc,"Usa","NodeJS")
+    Rel(Ufunc,db,"Leitura e Escrita","JSON/HTTPS")
+    Rel(front,Rfunc,"Usa","NodeJS")
+    Rel(Rfunc,db,"Leitura e Escrita","JSON/HTTPS")
+    Rel(front,Dfunc,"Usa","NodeJS")
+    Rel(Dfunc,db,"Leitura e Escrita","JSON/HTTPS")
+
+}
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_LEFT_RIGHT()
+LAYOUT_WITH_LEGEND()
+
+Boundary(c2, "CaririRH - Nível de Contêiner") {
+    ' Pessoa interessada no uso do sistema
+    Person(ucr, "Usuário CaririRH", "Administrador ou Gerente de RH, pessoa responsável por administrar os funcionários.","Person")
+    ' Descrição do sistema
+    System_Boundary(app, "CaririRH") {
+        Container(front, "Cariri RH - Web Application", "React.JS", "Interface web para utilização do sistema de gerenciamento dos funcionários, com API REST para chamadas de operações CRUD.")
+        Container(back, "API","Node.js/Express.js", "Fornecimento de endpoints, Autenticação e Autorização, utlizando API RESTful")
+        ContainerDb(db, "Bancos de Dados", "MongoDB", "Armazena todas as informações sobre os funcionários.")
+
+        Rel(front,back,"Usa","NodeJS")
+        Rel(back,db,"Leitura e Escrita","JSON/HTTPS")
+    }
+
+    Rel(ucr, front, "Gerencia funcionários utilizando o")
+}
+
+@enduml
